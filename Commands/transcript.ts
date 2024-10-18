@@ -25,7 +25,7 @@ export default {
             const { output, transcript } = await response.json();
 
             const embed = new EmbedBuilder()
-                .setTitle('Transcript result')
+                .setTitle('Transcript')
                 .setDescription(output)
 
             const buffer = Buffer.from(transcript, 'utf-8');

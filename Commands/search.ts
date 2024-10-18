@@ -24,7 +24,7 @@ export default {
 			const response = await fetch(n8nWebhookUrl + '?query=' + query + '&cx=' + Bun.env.GOOGLE_CSE_ID + '&key=' + Bun.env.GOOGLE_API_KEY);
 			const { output } = await response.json();
 			const embed = new EmbedBuilder()
-				.setTitle('Search Results')
+				.setTitle('Search')
 				.setDescription(output)
 
 			await interaction.editReply({ embeds: [embed] });

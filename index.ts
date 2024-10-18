@@ -10,6 +10,7 @@ export interface Command {
         name: string;
         description: string;
     };
+    autocomplete: (interaction: import('discord.js').AutocompleteInteraction, client?: Client) => Promise<void>;
     execute: (interaction: import('discord.js').Interaction, client?: Client) => Promise<void>;
 }
 

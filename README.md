@@ -30,5 +30,3 @@ This project is a Discord bot that utilizes Large Language Models (LLMs) to prov
 #### Dependencies
 - @types/bun
 ### Owner
-
-## 3. References

@@ -1,3 +1,4 @@
+
 import { AttachmentBuilder, EmbedBuilder, SlashCommandBuilder, type CommandInteraction, type SlashCommandStringOption } from "discord.js";
 
 const fetch = require('node-fetch');

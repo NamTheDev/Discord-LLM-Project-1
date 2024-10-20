@@ -15,7 +15,7 @@ The bot provides the following commands:
 ### References
 
 #### Runtime
-- bun
+- Bun
 
 #### Libraries
 - discord-api-types
@@ -35,7 +35,7 @@ The bot provides the following commands:
 #### LLMs Provider
 - Groq
 
-#### Dependencies
-- @types/bun
 
-## 3. Owner
+## 3. Owner & Developer
+This project is developed by Nguyen Thien Nam.
+Year started: 2024.

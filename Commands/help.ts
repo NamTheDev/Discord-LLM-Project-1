@@ -1,5 +1,6 @@
 import { CommandInteraction, SlashCommandBuilder } from 'discord.js';
 import { outputEmbed } from '../utils/outputEmbed';
+import { getN8nWebhook } from '../utils/getN8nWebhook';
 
 export default {
     data: new SlashCommandBuilder()
@@ -7,9 +8,12 @@ export default {
         .setDescription('Displays help information'),
 
     execute: async (interaction: CommandInteraction) => {
+        await interaction.deferReply();
         const { commands } = await import('../index');
-        const commandsList = commands.map((command) => `\`/${command.data.name}\``);
-        const output = commandsList.join(', ');
-        const helpEmbed = new outputEmbed(__filename, output);
+        const prompt = `Analyze the following commands and provide a guide panel on what is it used for and how to use it.\nPrefix: /\nCommands:\n${JSON.stringify(commands.toJSON())}`;
+        const response = await fetch(getN8nWebhook('chat') + '?chatModel=' + 'llama-3.2-90b-text-preview' + '&prompt=' + encodeURIComponent(prompt));
+        const { output } = await response.json();
+        
+        new outputEmbed(__filename, output).sendMessage(interaction);
     },
 };

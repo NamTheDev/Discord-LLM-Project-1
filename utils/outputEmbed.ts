@@ -33,7 +33,7 @@ export class outputEmbed {
     }
 
     public async sendMessage(interaction: CommandInteraction) {
-        return await interaction.editReply(this.replyConfig);
+        return await interaction.followUp(this.replyConfig);
     }
 
     constructor(fileName: string, output: string) {

@@ -33,14 +33,13 @@ export default {
         // Handle collected interactions
         collector.on('collect', async (submittedInteraction: ModalSubmitInteraction) => {
             const language = submittedInteraction.fields.getTextInputValue('language');
-
-            const encoder = new TextEncoder();
-            const content = encoder.encode(oldEmbed.description as string);
+            const content = encodeURIComponent(oldEmbed.description as string);
 
             // Fetch response from the webhook
             await submittedInteraction.deferReply({ ephemeral: true });
             const response = await fetch(getN8nWebhook('translate') + '?input=' + content + '&language=' + language);
             const { output } = await response.json();
+            console.log(response)
 
             const newEmbed = new outputEmbed("translate", output);
 

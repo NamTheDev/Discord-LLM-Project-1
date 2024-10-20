@@ -1,4 +1,4 @@
-import { CommandInteraction, SlashCommandBuilder } from 'discord.js';
+import { CommandInteraction, SlashCommandBuilder, EmbedBuilder } from 'discord.js';
 
 const helpCommand = new SlashCommandBuilder()
   .setName('help')
@@ -7,5 +7,6 @@ const helpCommand = new SlashCommandBuilder()
 export default {
   data: helpCommand,
   execute: async (interaction: CommandInteraction) => {
+    const helpEmbed = new EmbedBuilder();
   },
 };

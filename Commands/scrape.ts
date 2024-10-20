@@ -20,7 +20,7 @@ export default {
 		const url = interaction.options.get('url')?.value;
 
 		const urlRegex = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
-		if (!urlRegex.test(url)) {
+		if (!urlRegex.test(url as string)) {
 			await interaction.editReply('Invalid URL');
 			return;
 		}

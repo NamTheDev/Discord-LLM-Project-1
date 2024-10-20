@@ -6,14 +6,28 @@ This project is a Discord bot that utilizes Large Language Models (LLMs) to prov
 ## 2. Details
 ### Commands
 ### References
-We used the following libraries and tools:
-- bun as the runtime
+#### Runtime
+- bun
+
+#### Libraries
 - discord-api-types
 - discord.js
 - node-fetch
-- typescript as the language
-- aider, supermaven, continue dev, cline, qodo as AI tools
-- Groq as the LLMs provider
+
+#### Language
+- typescript
+
+#### AI Tools
+- aider
+- supermaven
+- continue dev
+- cline
+- qodo
+
+#### LLMs Provider
+- Groq
+
+#### Dependencies
 - @types/bun
 ### Owner
 

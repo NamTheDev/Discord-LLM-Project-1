@@ -1,10 +1,9 @@
 import { EmbedBuilder, SlashCommandBuilder, type CommandInteraction, type SlashCommandStringOption } from "discord.js";
 
 const fetch = require('node-fetch');
-const fs = require('fs');
 
-const config = JSON.parse(fs.readFileSync('config.json', 'utf-8'));
-const n8nWebhookUrl = config.n8n_webhook.search;
+import { outputEmbed } from "../utils/outputEmbed";
+import { getN8nWebhook } from "../utils/getN8nWebhook";
 
 export default {
 	data: new SlashCommandBuilder()
@@ -21,13 +20,10 @@ export default {
 		const query = interaction.options.get('query')?.value;
 
 		try {
-			const response = await fetch(n8nWebhookUrl + '?query=' + query + '&cx=' + Bun.env.GOOGLE_CSE_ID + '&key=' + Bun.env.GOOGLE_API_KEY);
+			const response = await fetch(getN8nWebhook("search") + '?query=' + query + '&cx=' + Bun.env.GOOGLE_CSE_ID + '&key=' + Bun.env.GOOGLE_API_KEY);
 			const { output } = await response.json();
-			const embed = new EmbedBuilder()
-				.setTitle('Search')
-				.setDescription(output)
 
-			await interaction.editReply({ embeds: [embed] });
+			new outputEmbed(__filename, output).sendMessage(interaction);
 		} catch (error) {
 			console.error('Error fetching the n8n webhook:', error);
 			await interaction.editReply('Failed to fetch the n8n webhook.');

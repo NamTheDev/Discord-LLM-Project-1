@@ -38,9 +38,8 @@ export default {
             const content = encoder.encode(oldEmbed.description as string);
 
             // Fetch response from the webhook
-            await submittedInteraction.deferReply();
+            await submittedInteraction.deferReply({ ephemeral: true });
             const response = await fetch(getN8nWebhook('translate') + '?input=' + content + '&language=' + language);
-            console.log(response)
             const { output } = await response.json();
 
             const newEmbed = new outputEmbed("translate", output);

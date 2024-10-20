@@ -17,8 +17,7 @@ export interface Command {
     autocomplete: (interaction: import('discord.js').AutocompleteInteraction, client?: Client) => Promise<void>;
     // Execute function for the command
     execute: (interaction: import('discord.js').Interaction, client?: Client) => Promise<void>;
-    // Add a note about the command interface
-    // This interface is used to define the structure of a command
+    // Define the command structure with data, autocomplete, and execute functions
 }
 // Define a custom collection class for commands
 class CommandsCollection extends Collection<string, Command> {

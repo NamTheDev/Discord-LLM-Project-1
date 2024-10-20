@@ -14,6 +14,7 @@ We used the following libraries and tools:
 - typescript as the language
 - aider, supermaven, continue dev, cline, qodo as AI tools
 - Groq as the LLMs provider
+- @types/bun
 ### Owner
 
 ## 3. References

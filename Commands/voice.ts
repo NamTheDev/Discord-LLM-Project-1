@@ -1,6 +1,5 @@
 import { CommandInteraction, SlashCommandBuilder, type SlashCommandStringOption } from "discord.js";
 
-import config from '../config.json' assert { type: 'json' };
 import { outputEmbed } from "../utils/outputEmbed";
 import { getN8nWebhook } from "../utils/getN8nWebhook";
 

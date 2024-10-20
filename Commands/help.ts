@@ -8,6 +8,6 @@ const helpCommand = new SlashCommandBuilder()
 export default {
   data: helpCommand,
   execute: async (interaction: CommandInteraction) => {
-    const helpEmbed = outputEmbed();
+    const helpEmbed = new outputEmbed();
   },
 };

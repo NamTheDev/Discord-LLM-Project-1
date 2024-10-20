@@ -5,7 +5,8 @@ This project is a Discord bot that utilizes Large Language Models (LLMs) to prov
 
 ## 2. Details
 ### Commands
-### Libraries and tools used
-### Owner of the project
+### References
+[here]
+### Owner
 
 ## 3. References

@@ -8,11 +8,11 @@ const eventFiles = fs.readdirSync(eventsPath).filter((file: string) => file.ends
 export default (client: Client) => {
     for (const file of eventFiles) {
         const event = require(path.join(eventsPath, file));
-        const { name: eventName, once: eventOnce, execute: eventExecute } = event.default;
-        if (eventOnce) {
-            client.once(eventName, (...args) => eventExecute(...args));
+        const { name, once, execute } = event.default;
+        if (once) {
+            client.once(name, (...args) => execute(...args));
         } else {
-            client.on(eventName, (...args) => eventExecute(...args));
+            client.on(name, (...args) => execute(...args));
         }
     }
 };

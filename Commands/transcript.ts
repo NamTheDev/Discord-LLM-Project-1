@@ -1,10 +1,9 @@
 import { AttachmentBuilder, EmbedBuilder, SlashCommandBuilder, type CommandInteraction, type SlashCommandStringOption } from "discord.js";
 
 const fetch = require('node-fetch');
-const fs = require('fs');
 
-const config = JSON.parse(fs.readFileSync('config.json', 'utf-8'));
-const n8nWebhookUrl = config.n8n_webhook.transcript.youtube;
+import { outputEmbed } from "../utils/outputEmbed";
+import { getN8nWebhook } from "../utils/getN8nWebhook";
 
 export default {
     data: new SlashCommandBuilder()
@@ -21,17 +20,16 @@ export default {
         const url = interaction.options.get('url')?.value;
 
         try {
-            const response = await fetch(n8nWebhookUrl + `?youtubeURL=${url}`);
+            const response = await fetch(getN8nWebhook('transcript') + `?youtubeURL=${url}`);
+            if (response.status === 500) return await interaction.editReply('You may have entered an invalid / unavailable youtube URL.');
             const { output, transcript } = await response.json();
-
-            const embed = new EmbedBuilder()
-                .setTitle('Transcript')
-                .setDescription(output)
 
             const buffer = Buffer.from(transcript, 'utf-8');
             const attachment = new AttachmentBuilder(buffer, { name: 'transcript.txt' });
 
-            await interaction.editReply({ embeds: [embed], files: [attachment] });
+             const embed = new outputEmbed(__filename, output)
+            embed.addAttachments(attachment);
+            await embed.sendMessage(interaction);
         } catch (error) {
             console.error('Error fetching the n8n webhook:', error);
             await interaction.editReply('Failed to fetch the n8n webhook.');

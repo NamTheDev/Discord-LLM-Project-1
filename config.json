@@ -1,11 +1,4 @@
 {
-  "n8n_webhook": {
-    "search": "http://26.116.14.177:5678/webhook/49402b3d-6198-487a-bc6f-ed0afd539f82",
-    "transcript": {
-      "youtube": "http://26.116.14.177:5678/webhook/f78b0f26-44d2-4e57-9600-21853257659a"
-    },
-    "chat": "http://26.116.14.177:5678/webhook/2bf60de3-91a6-45b5-9556-bddc4d87b9b8"
-  },
   "groq_models": [
     "distil-whisper-large-v3-en",
     "whisper-large-v3-turbo",

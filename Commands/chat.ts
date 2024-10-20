@@ -1,10 +1,10 @@
 import { AutocompleteInteraction, EmbedBuilder, SlashCommandBuilder, type CommandInteraction, type SlashCommandStringOption } from "discord.js";
 
 const fetch = require('node-fetch');
-const fs = require('fs');
 
-const config = JSON.parse(fs.readFileSync('config.json', 'utf-8'));
-const n8nWebhookUrl = config.n8n_webhook.chat;
+import config from '../config.json' assert { type: 'json' };
+import { outputEmbed } from "../utils/outputEmbed";
+import { getN8nWebhook } from "../utils/getN8nWebhook";
 
 export default {
     data: new SlashCommandBuilder()
@@ -47,14 +47,10 @@ export default {
         await interaction.deferReply();
 
         try {
-            const response = await fetch(n8nWebhookUrl + '?chatModel=' + chatModel + '&prompt=' + prompt);
+            const response = await fetch(getN8nWebhook('chat') + '?chatModel=' + chatModel + '&prompt=' + prompt);
             const { output } = await response.json();
-            
-            const embed = new EmbedBuilder()
-                .setTitle("Chat")
-                .setDescription(output)
 
-            await interaction.editReply({ embeds: [embed] });
+            new outputEmbed(__filename, output).sendMessage(interaction);
         } catch (error) {
             console.error('Error fetching the n8n webhook:', error);
             await interaction.editReply('Failed to fetch the n8n webhook.');

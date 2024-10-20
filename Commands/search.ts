@@ -23,7 +23,16 @@ export default {
 			const response = await fetch(getN8nWebhook("search") + '?query=' + query + '&cx=' + Bun.env.GOOGLE_CSE_ID + '&key=' + Bun.env.GOOGLE_API_KEY);
 			const { output } = await response.json();
 
-			new outputEmbed(__filename, output).sendMessage(interaction);
+			const embed = new EmbedBuilder()
+			  .setTitle('Search Results')
+			  .setDescription(`Results for ${query}`)
+			  .addFields([
+			    { name: 'Result 1', value: 'This is the first result' },
+			    { name: 'Result 2', value: 'This is the second result' },
+			  ])
+			  .setColor('BLUE');
+
+			interaction.reply({ embeds: [embed] });
 		} catch (error) {
 			console.error('Error fetching the n8n webhook:', error);
 			await interaction.editReply('Failed to fetch the n8n webhook.');

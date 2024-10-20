@@ -10,17 +10,17 @@ export default {
 		.setName('scrape')
 		.setDescription('Scrape the web')
 		.addStringOption((option: SlashCommandStringOption) =>
-			option.setName('query')
-				.setDescription('The query to scrape')
+			option.setName('url')
+				.setDescription('The URL to scrape')
 				.setRequired(true)
 		),
 	async execute(interaction: CommandInteraction) {
 		await interaction.deferReply();
 
-		const query = interaction.options.get('query')?.value;
+		const url = interaction.options.get('url')?.value;
 
 		try {
-			const response = await fetch(getN8nWebhook("scrape") + '?query=' + query);
+			const response = await fetch(getN8nWebhook("scrape") + '?url=' + url);
 			const { output } = await response.json();
 
 			new outputEmbed(__filename, output).sendMessage(interaction);

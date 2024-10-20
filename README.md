@@ -6,8 +6,11 @@ This project is a Discord bot that utilizes Large Language Models (LLMs) to prov
 ## 2. Details
 
 ### Commands
-
-
+The bot provides the following commands:
+- `/chat`: Chat with LLM models from Groq
+- `/search`: Browse the web
+- `/transcript`: Transcript a video from Youtube to a text file
+- `/translate`: Translate text from one language to another
 
 ### References
 

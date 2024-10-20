@@ -7,9 +7,10 @@ This project is a Discord bot that utilizes Large Language Models (LLMs) to prov
 
 ### Commands
 
+
+
 ### References
-### Commands
-### References
+
 #### Runtime
 - bun
 
@@ -33,4 +34,5 @@ This project is a Discord bot that utilizes Large Language Models (LLMs) to prov
 
 #### Dependencies
 - @types/bun
-### Owner
+
+## 3. Owner

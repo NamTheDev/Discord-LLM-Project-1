@@ -8,21 +8,19 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBit
 
 // Define the Command interface with data, autocomplete, and execute functions
 export interface Command {
-    // Define the command data and its properties
+    // Command data
     data: {
         name: string;
         description: string;
     };
-    // Autocomplete function for the command
+    // Autocomplete function
     autocomplete: (interaction: import('discord.js').AutocompleteInteraction, client?: Client) => Promise<void>;
-    // Execute function for the command
+    // Execute function
     execute: (interaction: import('discord.js').Interaction, client?: Client) => Promise<void>;
-    // Define the command structure with data, autocomplete, and execute functions
 }
 // Define a custom collection class for commands
 class CommandsCollection extends Collection<string, Command> {
-    // Custom get method to find a command by name
-    // This method allows us to retrieve a command by its name
+    // Get command by name
     get(name: string) {
         return super.find((command) => command.data.name === name);
     }
@@ -30,8 +28,7 @@ class CommandsCollection extends Collection<string, Command> {
 
 // Define a custom collection class for interactions
 class InteractionsCollection extends Collection<string, (interaction: ButtonInteraction | AnySelectMenuInteraction, client?: Client) => Promise<void>> {
-    // Custom get method to find an interaction by name
-    // This method allows us to retrieve an interaction by its name
+    // Get interaction by name
     get(name: string) {
         return this.find((value, key) => key === name);
     }

@@ -1,4 +1,4 @@
-import { CommandInteraction, SlashCommandBuilder, SelectMenuBuilder, ActionRowBuilder, SelectMenuOptionBuilder } from 'discord.js';
+import { CommandInteraction, SlashCommandBuilder, StringSelectMenuBuilder, StringSelectMenuOptionBuilder, ActionRowBuilder } from 'discord.js';
 import { outputEmbed } from '../utils/outputEmbed';
 import { getN8nWebhook } from '../utils/getN8nWebhook';
 
@@ -16,12 +16,12 @@ export default {
 
         const pages = output.match(/^(1\..*?)\n\n/gs);
         if (pages) {
-            const pageOptions = pages.map((page, index) => new SelectMenuOptionBuilder()
+            const pageOptions = pages.map((page, index) => new StringSelectMenuOptionBuilder()
                 .setLabel(`Page ${index + 1}`)
                 .setDescription(page.trim())
                 .setValue(`${index}`));
 
-            const selectMenu = new SelectMenuBuilder()
+            const selectMenu = new StringSelectMenuBuilder()
                 .setCustomId('helpMenu')
                 .setPlaceholder('Select a page')
                 .addOptions(pageOptions);

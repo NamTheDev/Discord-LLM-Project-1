@@ -19,6 +19,12 @@ export default {
 
 		const url = interaction.options.get('url')?.value;
 
+		const urlRegex = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
+		if (!urlRegex.test(url)) {
+			await interaction.editReply('Invalid URL');
+			return;
+		}
+
 		try {
 			const response = await fetch(getN8nWebhook("scrape") + '?url=' + url);
 			const { output } = await response.json();

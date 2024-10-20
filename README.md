@@ -1,6 +1,7 @@
 # Discord+LLM Project 1
 
 ## 1. Introduction
+This project is a Discord bot that utilizes Large Language Models (LLMs) to provide various functionalities, including video transcription, chat, and search capabilities. The bot is built using Discord.js and interacts with N8N webhooks to process user requests.
 
 ## 2. Details
 

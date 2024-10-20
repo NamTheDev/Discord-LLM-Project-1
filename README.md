@@ -1,4 +1,4 @@
-# DC+LLM Project 1
+# Updated Project Name
 
 ![Discord AI Assistant Bot](https://img.shields.io/badge/Discord-AI%20Assistant%20Bot-blue.svg)
 ![GitHub](https://img.shields.io/github/license/yourusername/discord-ai-assistant-bot.svg)

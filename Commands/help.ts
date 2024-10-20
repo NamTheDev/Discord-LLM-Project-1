@@ -7,6 +7,5 @@ const helpCommand = new SlashCommandBuilder()
 export default {
   data: helpCommand,
   execute: async (interaction: CommandInteraction) => {
-    // Add help command logic here
   },
 };

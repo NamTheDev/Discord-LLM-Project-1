@@ -24,7 +24,7 @@ export default {
 			const { output } = await response.json();
 
 			const embed = new outputEmbed(__filename, output);
-			await interaction.editReply({ embeds: [embed] });
+			await response(interaction, embed);
 		} catch (error) {
 			console.error('Error fetching the n8n webhook:', error);
 			await interaction.editReply('Failed to fetch the n8n webhook.');

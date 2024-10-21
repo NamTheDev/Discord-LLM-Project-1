@@ -51,7 +51,7 @@ export default {
             const response = await fetch(getN8nWebhook('chat') + '?chatModel=' + chatModel + '&prompt=' + prompt);
             const { output } = await response.json();
 
-            const embed = new outputEmbed(__filename, output);
+            const { embed } = new outputEmbed(__filename, output);
             await sendResponse(interaction, embed);
         } catch (error) {
             console.error('Error fetching the n8n webhook:', error);

@@ -24,7 +24,7 @@ export default {
 			const response = await fetch(getN8nWebhook("search") + '?query=' + query + '&cx=' + Bun.env.GOOGLE_CSE_ID + '&key=' + Bun.env.GOOGLE_API_KEY);
 			const { output } = await response.json();
 
-			const embed = new outputEmbed(__filename, output);
+			const { embed } = new outputEmbed(__filename, output);
 			await sendResponse(interaction, embed);
 		} catch (error) {
 			console.error('Error fetching the n8n webhook:', error);

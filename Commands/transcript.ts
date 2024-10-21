@@ -28,8 +28,8 @@ export default {
             const buffer = Buffer.from(transcript, 'utf-8');
             const attachment = new AttachmentBuilder(buffer, { name: 'transcript.txt' });
 
-            const embed = new outputEmbed(__filename, output);
-            await sendResponse(interaction, embed, attachment);
+            const { embed } = new outputEmbed(__filename, output);
+            await sendResponse(interaction, embed, [attachment]);
         } catch (error) {
             console.error('Error fetching the n8n webhook:', error);
             await interaction.editReply('Failed to fetch the n8n webhook.');

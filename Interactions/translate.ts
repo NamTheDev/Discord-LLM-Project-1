@@ -1,6 +1,7 @@
 import { ActionRowBuilder, AttachmentBuilder, ButtonInteraction, Client, CommandInteraction, ComponentType, EmbedBuilder, InteractionCollector, ModalBuilder, ModalSubmitInteraction, TextInputBuilder, TextInputStyle } from "discord.js";
 import { outputEmbed } from "../utils/outputEmbed";
 import { getN8nWebhook } from "../utils/getN8nWebhook";
+import { sendResponse } from "../utils/sendResponse";
 
 export default {
     name: 'translate',
@@ -39,17 +40,14 @@ export default {
             await submittedInteraction.deferReply({ ephemeral: true });
             const response = await fetch(getN8nWebhook('translate') + '?input=' + content + '&language=' + language);
             const { output } = await response.json();
-            console.log(response)
 
-            const newEmbed = new outputEmbed("translate", output);
+            const { embed } = new outputEmbed("translate", output);
 
             const oldAttachments = oldMessage.attachments.map((attachment) =>
                 new AttachmentBuilder(attachment.url, { name: attachment.name })
             );
 
-            if (oldMessage.attachments) newEmbed.addAttachments(...oldAttachments);
-
-            await newEmbed.sendMessage(submittedInteraction as unknown as CommandInteraction);
+            await sendResponse(submittedInteraction as unknown as CommandInteraction, embed, oldAttachments);
 
             // Stop the collector after processing
             collector.stop();

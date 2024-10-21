@@ -30,7 +30,8 @@ export default {
             const response = await fetch(getN8nWebhook('translate') + '?input=' + input + '&language=' + language);
             const { output } = await response.json();
 
-            new outputEmbed(__filename, output).sendMessage(interaction);
+            const embed = new outputEmbed(__filename, output);
+            await interaction.editReply({ embeds: [embed] });
         } catch (error) {
             console.error('Error fetching the n8n webhook:', error);
             await interaction.editReply('Failed to fetch the n8n webhook.');

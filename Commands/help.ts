@@ -13,6 +13,7 @@ export default {
         const prompt = `Analyze the following commands and provide a guide panel on what is it used for and how to use it.\nPrefix: /\nMaximum length: 6000 characters total.\nCommands:\n${JSON.stringify(commands.toJSON())}`;
         const response = await fetch(getN8nWebhook('chat') + '?chatModel=' + 'llama-3.2-90b-text-preview' + '&prompt=' + encodeURIComponent(prompt));
         const { output } = await response.json();
-        new outputEmbed(__filename, output).sendMessage(interaction);
+        const embed = new outputEmbed(__filename, output);
+        await interaction.editReply({ embeds: [embed] });
     },
 };

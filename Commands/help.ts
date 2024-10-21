@@ -1,6 +1,7 @@
 import { CommandInteraction, SlashCommandBuilder } from 'discord.js';
 import { outputEmbed } from '../utils/outputEmbed';
 import { getN8nWebhook } from '../utils/getN8nWebhook';
+import { sendResponse } from '../utils/sendResponse';
 
 export default {
     data: new SlashCommandBuilder()
@@ -14,6 +15,6 @@ export default {
         const response = await fetch(getN8nWebhook('chat') + '?chatModel=' + 'llama-3.2-90b-text-preview' + '&prompt=' + encodeURIComponent(prompt));
         const { output } = await response.json();
         const embed = new outputEmbed(__filename, output);
-        await interaction.editReply({ embeds: [embed] });
+        await sendResponse(interaction, embed);
     },
 };

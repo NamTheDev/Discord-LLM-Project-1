@@ -5,6 +5,7 @@ const fetch = require('node-fetch');
 import config from '../config.json' assert { type: 'json' };
 import { outputEmbed } from "../utils/outputEmbed";
 import { getN8nWebhook } from "../utils/getN8nWebhook";
+import { sendResponse } from '../utils/sendResponse';
 
 export default {
     data: new SlashCommandBuilder()
@@ -51,7 +52,7 @@ export default {
             const { output } = await response.json();
 
             const embed = new outputEmbed(__filename, output);
-            await interaction.editReply({ embeds: [embed] });
+            await sendResponse(interaction, embed);
         } catch (error) {
             console.error('Error fetching the n8n webhook:', error);
             await interaction.editReply('Failed to fetch the n8n webhook.');

@@ -3,7 +3,20 @@ import Groq from 'groq-sdk';
 import type { RequestOptions } from 'groq-sdk/core.mjs';
 import type { ChatCompletionCreateParamsNonStreaming } from 'groq-sdk/resources/chat/completions.mjs';
 import fetch from 'node-fetch';
-import express, { Request, Response } from 'express';
+import express, { type Request, type Response } from 'express';
+
+const app = express();
+const port = 3000;
+
+app.use(express.json());
+
+app.get('/', (req: Request, res: Response) => {
+    res.json({ message: "reloaded" })
+});
+
+app.listen(port, () => {
+    console.log(`Server started on port ${port}`);
+});
 
 const groq_client = new Groq({
     apiKey: process.env.GROQ_API_KEY
@@ -29,7 +42,7 @@ client.on('messageCreate', async (message) => {
     const mention = message.mentions.users.first()
     const client_ID = process.env.CLIENT_ID
 
-    if(!mention || mention.id !== client_ID) return;
+    if (!mention || mention.id !== client_ID) return;
 
     if (process_running) return;
 
@@ -90,7 +103,7 @@ client.on('messageCreate', async (message) => {
         model: 'llama-3.2-90b-text-preview'
     });
     const { prompt_type, queries, chat_response } = chatCompletion.choices[0].message.content ? JSON.parse(chatCompletion.choices[0].message.content) : {};
-    
+
     if (prompt_type === 'chat') {
         await message.reply({
             content: chat_response,
@@ -120,16 +133,3 @@ client.on('messageCreate', async (message) => {
 client.on('ready', (client) => console.log(client.user.tag));
 
 client.login(process.env.TOKEN);
-
-const app = express();
-const port = 3000;
-
-app.use(express.json());
-
-app.get('/', (req: Request, res: Response) => {
-    res.send('Hello World!');
-});
-
-app.listen(port, () => {
-    console.log(`Server started on port ${port}`);
-});

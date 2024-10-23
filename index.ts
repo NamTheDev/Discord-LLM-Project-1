@@ -4,6 +4,7 @@ import type { RequestOptions } from 'groq-sdk/core.mjs';
 import type { ChatCompletionCreateParamsNonStreaming } from 'groq-sdk/resources/chat/completions.mjs';
 import fetch from 'node-fetch';
 import express, { type Request, type Response } from 'express';
+import { spawn } from 'bun';
 
 const app = express();
 const port = 3000;
@@ -11,6 +12,9 @@ const port = 3000;
 app.use(express.json());
 
 app.get('/', (req: Request, res: Response) => {
+    spawn({
+        cmd: ['git', 'pull']
+    })
     res.json({ message: "reloaded" })
 });
 

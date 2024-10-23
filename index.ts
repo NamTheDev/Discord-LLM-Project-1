@@ -1,4 +1,4 @@
-import { ChannelType, Client, GatewayIntentBits, Partials } from 'discord.js';
+import { Client, GatewayIntentBits, Partials } from 'discord.js';
 import Groq from 'groq-sdk';
 import type { RequestOptions } from 'groq-sdk/core.mjs';
 import type { ChatCompletionCreateParamsNonStreaming } from 'groq-sdk/resources/chat/completions.mjs';

@@ -3,9 +3,10 @@
   "module": "index.ts",
   "type": "module",
   "scripts": {
-    "start": "bun --watch ."
+    "start": "builder --filePath steps.md"
   },
   "devDependencies": {
+    "@nam_the_dev/builder": "1.0.6",
     "@types/bun": "latest"
   },
   "peerDependencies": {

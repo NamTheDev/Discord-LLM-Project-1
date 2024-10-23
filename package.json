@@ -3,10 +3,11 @@
   "module": "index.ts",
   "type": "module",
   "scripts": {
-    "start": "builder --filePath steps.md"
+    "start": "builder --filePath steps.md",
+    "dev": "builder --filePath dev.md"
   },
   "devDependencies": {
-    "@nam_the_dev/builder": "1.0.6",
+    "@nam_the_dev/builder": "1.0.7",
     "@types/bun": "latest"
   },
   "peerDependencies": {

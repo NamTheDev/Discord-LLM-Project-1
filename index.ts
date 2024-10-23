@@ -5,16 +5,28 @@ import type { ChatCompletionCreateParamsNonStreaming } from 'groq-sdk/resources/
 import fetch from 'node-fetch';
 import express, { type Request, type Response } from 'express';
 import { spawn } from 'bun';
+import { readableStreamAsyncIterable } from 'groq-sdk/lib/streaming.mjs';
 
 const app = express();
 const port = 3000;
 
 app.use(express.json());
 
-app.get('/', (req: Request, res: Response) => {
-    spawn({
+app.get('/', async (req: Request, res: Response) => {
+    const process = spawn({
         cmd: ['git', 'pull']
     })
+
+    const stream = process.stdout;
+    const asyncIterator =  readableStreamAsyncIterable(stream);
+
+    const decoder = new TextDecoder('utf-8');
+
+    for await (const chunk of asyncIterator) {
+        const string = decoder.decode(chunk as AllowSharedBufferSource);
+        console.log(string);
+    }
+
     res.json({ message: "reloaded" })
 });
 

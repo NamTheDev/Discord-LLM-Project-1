@@ -27,7 +27,7 @@ app.get('/', async (req: Request, res: Response) => {
         console.log(string);
     }
 
-    res.json({ message: "reloaded" })
+    res.json({ message: "Github changes reload." })
 });
 
 app.listen(port, () => {

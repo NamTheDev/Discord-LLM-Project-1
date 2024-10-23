@@ -3,10 +3,10 @@ import Groq from 'groq-sdk';
 import type { RequestOptions } from 'groq-sdk/core.mjs';
 import type { ChatCompletionCreateParamsNonStreaming } from 'groq-sdk/resources/chat/completions.mjs';
 import fetch from 'node-fetch';
-
+import express, { Request, Response } from 'express';
 
 const groq_client = new Groq({
-    apiKey: Bun.env.GROQ_API_KEY
+    apiKey: process.env.GROQ_API_KEY
 })
 
 const client = new Client({
@@ -27,13 +27,13 @@ async function chat(body: ChatCompletionCreateParamsNonStreaming, options: Reque
 
 client.on('messageCreate', async (message) => {
     const mention = message.mentions.users.first()
-    const client_ID = Bun.env.CLIENT_ID
+    const client_ID = process.env.CLIENT_ID
 
     if(!mention || mention.id !== client_ID) return;
 
     if (process_running) return;
 
-    const webhookURL = `http://${Bun.env.N8N_HOST_IP}:5678/webhook/`
+    const webhookURL = `http://${process.env.N8N_HOST_IP}:5678/webhook/`
 
     await message.channel.sendTyping()
 
@@ -120,3 +120,16 @@ client.on('messageCreate', async (message) => {
 client.on('ready', (client) => console.log(client.user.tag));
 
 client.login(process.env.TOKEN);
+
+const app = express();
+const port = 3000;
+
+app.use(express.json());
+
+app.get('/', (req: Request, res: Response) => {
+    res.send('Hello World!');
+});
+
+app.listen(port, () => {
+    console.log(`Server started on port ${port}`);
+});
